@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيان قطر | منصة الألعاب والتحديات التفاعلية للغة العربية في قطر</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Amiri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for celebrations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        amiri: ['Amiri', 'serif'],
+                    },
+                    colors: {
+                        qatar: {
+                            maroon: '#8A1538',
+                            dark: '#5C0B23',
+                            light: '#FDF2F5',
+                            gold: '#D4AF37',
+                            sand: '#F5EFE6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #F8FAFC;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8A1538;
+            border-radius: 10px;
+        }
+
+        /* Hide scrollbar for tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Card Hover & Animations */
+        .game-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .game-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(138, 21, 56, 0.15), 0 8px 10px -6px rgba(138, 21, 56, 0.1);
+        }
+
+        /* Wheel Spin Transition */
+        .wheel-transition {
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-qatar-maroon selection:text-white">
+
+    <!-- ==================== HEADER / HERO SECTION ==================== -->
+    <header class="relative bg-gradient-to-br from-qatar-dark via-qatar-maroon to-[#A91D47] text-white overflow-hidden shadow-xl">
+        <!-- Decorative Arabic Calligraphy / Geometric Pattern -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+                <path d="M60 0 L120 60 L60 120 L0 60 Z" fill="none" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="60" cy="60" r="26" fill="none" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="60" cy="60" r="10" fill="none" stroke="#D4AF37" stroke-width="2"/>
+            </svg>
+        </div>
+
+        <!-- Top Navbar -->
+        <nav class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <!-- Letter Dhad Emblem SVG -->
+                <div class="w-12 h-12 rounded-2xl bg-white p-1.5 shadow-lg flex items-center justify-center border-2 border-qatar-gold">
+                    <span class="font-amiri text-3xl font-bold text-qatar-maroon leading-none select-none">ض</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl font-black tracking-tight">بيان قطر</span>
+                        <span class="bg-white/20 backdrop-blur-sm text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/30">لغة الضاد</span>
+                    </div>
+                    <p class="text-xs text-rose-100 font-medium">منصة الألعاب والتحديات التفاعلية للغة العربية في دولة قطر</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="openQuestionEditor()" class="bg-white/15 hover:bg-white/25 backdrop-blur-md text-white px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition border border-white/20 cursor-pointer">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="hidden sm:inline">مركز الأسئلة اللغوية</span>
+                    <span class="sm:hidden">الأسئلة</span>
+                </button>
+                <button onclick="openClubHistoryModal()" class="bg-qatar-gold hover:bg-yellow-500 text-slate-900 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 shadow-md transition cursor-pointer">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>مبادرات قطر</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-6 pb-12 text-center">
+            <div class="inline-flex items-center gap-2 bg-black/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-4 border border-white/15">
+                <span class="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span>
+                <span>منهج قطر التعليمي • الأدب والشعر القطري • الفصاحة والبيان</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight">
+                أتقن جماليات اللغة العربية <br class="hidden sm:inline">
+                <span class="text-amber-300">بأسلوب تفاعلي ممتع!</span>
+            </h1>
+
+            <p class="text-rose-100 text-sm sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                أنشطة ومسابقات تفاعلية لطلاب المدارس وعشاق العربية في قطر: النحو والإعراب، البلاغة والبيان، روائع الشعر القطري، الأمثال الشعبية، وجهود دولة قطر في حماية اللغة العربية. اختر تبويباً وابدأ التحدي!
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                <button onclick="surpriseMeGame()" class="bg-white text-qatar-maroon hover:bg-rose-50 font-extrabold px-6 py-3.5 rounded-2xl shadow-xl flex items-center gap-2.5 text-sm sm:text-base transition transform hover:scale-105 cursor-pointer">
+                    <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                    <span>فاجئني بتحدٍّ لغوي!</span>
+                </button>
+
+                <button onclick="openIntroVideoModal()" class="bg-black/30 hover:bg-black/45 backdrop-blur-md text-white border border-white/30 font-bold px-5 py-3.5 rounded-2xl flex items-center gap-2.5 text-sm sm:text-base transition cursor-pointer">
+                    <span class="w-7 h-7 rounded-full bg-qatar-maroon flex items-center justify-center text-xs shadow border border-white/20">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </span>
+                    <span>قانون حماية اللغة العربية في قطر</span>
+                    <span class="text-xs bg-white/20 px-2 py-0.5 rounded-lg">2019</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== FILTER & SEARCH CONTROLS ==================== -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+        
+        <!-- Filter Bar Card -->
+        <div class="bg-white rounded-3xl shadow-lg border border-slate-100 p-4 sm:p-5 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                
+                <!-- Age / Audience Pills -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+                    <span class="text-xs font-bold text-slate-400 ml-1 whitespace-nowrap">المرحلة:</span>
+                    <button onclick="setAudienceFilter('all')" id="aud-all" class="aud-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-qatar-maroon text-white shadow-sm transition cursor-pointer whitespace-nowrap">
+                        الكل
+                    </button>
+                    <button onclick="setAudienceFilter('kids')" id="aud-kids" class="aud-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer whitespace-nowrap">
+                        المرحلة الابتدائية
+                    </button>
+                    <button onclick="setAudienceFilter('youth')" id="aud-youth" class="aud-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer whitespace-nowrap">
+                        الإعدادية والثانوية
+                    </button>
+                    <button onclick="setAudienceFilter('adults')" id="aud-adults" class="aud-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer whitespace-nowrap">
+                        المعلمون والمثقفون
+                    </button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full lg:w-72">
+                    <input type="text" id="searchInput" oninput="renderGames()" placeholder="ابحث عن لعبة أو مهارة لغوية..." class="w-full bg-slate-50 border border-slate-200 focus:border-qatar-maroon focus:bg-white rounded-xl py-2.5 pr-10 pl-4 text-sm outline-none transition">
+                    <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3.5 text-slate-400 text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-4" id="categoryTabs">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+
+        <!-- Active Category Status Header -->
+        <div class="flex items-center justify-between mb-6 px-1">
+            <div class="flex items-center gap-2.5">
+                <div class="w-2.5 h-7 bg-qatar-maroon rounded-full"></div>
+                <h2 class="text-lg sm:text-xl font-black text-slate-800" id="activeCategoryTitle">
+                    16 لعبة وتحدي في «الكل»
+                </h2>
+            </div>
+            <div class="text-xs sm:text-sm text-slate-500 font-semibold hidden sm:block">
+                <i class="fa-solid fa-chalkboard-user text-qatar-maroon ml-1"></i>
+                مناسبة للاستخدام الصفي والمسابقات الطلابية في قطر
+            </div>
+        </div>
+
+        <!-- ==================== GAMES GRID ==================== -->
+        <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 mb-16">
+            <!-- Game Cards Injected by JS -->
+        </div>
+
+        <!-- ==================== STATS SECTION (أرقام اللغة العربية في قطر) ==================== -->
+        <section class="bg-gradient-to-r from-slate-900 via-qatar-dark to-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl mb-12 relative overflow-hidden">
+            <div class="absolute -left-6 -bottom-10 opacity-10 text-9xl font-amiri font-bold select-none">الضاد</div>
+            <div class="relative z-10">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-300 bg-white/10 px-3 py-1 rounded-full">مؤشرات ومعالم لغوية</span>
+                    <h3 class="text-2xl sm:text-3xl font-black mt-2">اللغة العربية في دولة قطر.. ريادة وتمكين</h3>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
+                        <div class="text-3xl sm:text-4xl font-black text-amber-300 mb-1" id="statPlaysCount">2,480</div>
+                        <div class="text-xs sm:text-sm text-rose-100 font-bold">مرات اللعب والتدريب</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
+                        <div class="text-3xl sm:text-4xl font-black text-white mb-1">2019</div>
+                        <div class="text-xs sm:text-sm text-rose-100 font-bold">قانون حماية اللغة العربية</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
+                        <div class="text-3xl sm:text-4xl font-black text-amber-300 mb-1">28</div>
+                        <div class="text-xs sm:text-sm text-rose-100 font-bold">حرفاً في أبجدية الضاد</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
+                        <div class="text-3xl sm:text-4xl font-black text-white mb-1" id="statQuestionsCount">14</div>
+                        <div class="text-xs sm:text-sm text-rose-100 font-bold">سؤال وتحدي لغوي</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-white border-t border-slate-200 py-8 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <span class="w-8 h-8 rounded-xl bg-qatar-maroon text-white flex items-center justify-center font-amiri text-xl font-bold">ض</span>
+                <span class="font-black text-slate-800 text-lg">منصة بيان قطر التفاعلية</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-500 mb-4">
+                منصة تعليمية تفاعلية لطلاب المدارس والمعلمين في دولة قطر لتعزيز مهارات اللغة العربية والأدب القطري
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <button onclick="openFeedbackModal()" class="text-xs sm:text-sm font-bold text-qatar-maroon hover:underline flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>ملاحظات واقتراحات المعلمين والطلاب</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== PLAYABLE GAME MODAL ==================== -->
+    <div id="gameModal" class="fixed inset-0 z-50 hidden bg-slate-900/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] border-2 border-qatar-maroon/30">
+            
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-l from-qatar-dark to-qatar-maroon text-white px-5 py-3.5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span id="modalGameIcon" class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-lg">📖</span>
+                    <div>
+                        <h3 id="modalGameTitle" class="font-black text-base sm:text-lg leading-tight">اسم اللعبة</h3>
+                        <p id="modalGameSubtitle" class="text-xs text-rose-100">تحدي لغوي تفاعلي</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleFullScreen()" title="ملء الشاشة" class="w-9 h-9 rounded-xl bg-white/15 hover:bg-white/25 flex items-center justify-center text-sm transition cursor-pointer">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                    <button onclick="closeGameModal()" class="bg-black/25 hover:bg-black/40 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition cursor-pointer">
+                        <span>إغلاق</span>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Game Stage -->
+            <div id="gameStage" class="p-4 sm:p-8 overflow-y-auto flex-1 bg-slate-50 flex flex-col items-center justify-center min-h-[420px]">
+                <!-- Dynamic Game Content Rendered Here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== QUESTION EDITOR MODAL (مركز التعديل على الأسئلة) ==================== -->
+    <div id="editorModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+            <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-gear text-amber-400"></i>
+                    <h3 class="font-black text-lg">مركز الأسئلة اللغوية (للمعلمين والطلاب)</h3>
+                </div>
+                <button onclick="closeModal('editorModal')" class="text-slate-400 hover:text-white text-xl cursor-pointer">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4">
+                <p class="text-sm text-slate-600">يمكنك إضافة أسئلتك الخاصة في النحو أو الإملاء أو الأدب القطري لتظهر فوراً في جميع الألعاب الصفية!</p>
+                
+                <div class="bg-rose-50/70 border border-rose-100 rounded-2xl p-4 space-y-3">
+                    <h4 class="font-bold text-sm text-qatar-maroon">إضافة سؤال لغوي جديد:</h4>
+                    <input type="text" id="newQText" placeholder="اكتب السؤال هنا (مثال: ما جمع كلمة «لؤلؤة»؟)" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-sm outline-none focus:border-qatar-maroon">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <input type="text" id="newQOpt1" placeholder="الإجابة الصحيحة ✓" class="bg-white border border-green-300 rounded-xl px-3 py-2 text-xs outline-none">
+                        <input type="text" id="newQOpt2" placeholder="خيار خاطئ 1" class="bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none">
+                        <input type="text" id="newQOpt3" placeholder="خيار خاطئ 2" class="bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none">
+                    </div>
+                    <button onclick="addCustomQuestion()" class="bg-qatar-maroon hover:bg-qatar-dark text-white font-bold text-xs px-5 py-2.5 rounded-xl transition cursor-pointer">
+                        + إضافة السؤال لبنك الأسئلة
+                    </button>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm text-slate-700 mb-2">الأسئلة المتوفرة حالياً (<span id="editorQCount">0</span>):</h4>
+                    <div id="questionsList" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                        <!-- Questions list -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== QATAR ARABIC INITIATIVES MODAL ==================== -->
+    <div id="historyModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+            <div class="bg-gradient-to-l from-qatar-dark to-qatar-maroon text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-book-open text-amber-300"></i>
+                    <h3 class="font-black text-lg">جهود دولة قطر في تعزيز اللغة العربية</h3>
+                </div>
+                <button onclick="closeModal('historyModal')" class="text-white/80 hover:text-white text-xl cursor-pointer">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 text-sm leading-relaxed">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <h4 class="font-black text-qatar-maroon text-base mb-1">قانون حماية اللغة العربية رقم (7) لسنة 2019</h4>
+                    <p class="text-slate-600">أصدرت دولة قطر قانون حماية اللغة العربية لإلزام الوزارات والهيئات الحكومية والمؤسسات التعليمية باستخدام اللغة العربية في اجتماعاتها ومراسلاتها، وتعزيز حضورها في الأماكن العامة والإعلانات.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl">
+                        <div class="font-black text-amber-800 mb-1">📚 معجم الدوحة التاريخي للغة العربية</div>
+                        <p class="text-xs text-amber-700">أكبر مشروع علمي ومعجمي يرصد تطور ألفاظ اللغة العربية عبر العصور منذ أقدم النقوش حتى العصر الحديث.</p>
+                    </div>
+                    <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl">
+                        <div class="font-black text-qatar-maroon mb-1">🎙️ مركز مناظرات قطر</div>
+                        <p class="text-xs text-rose-900">ينظم البطولات الدولية لمناظرات المدارس والجامعات باللغة العربية لنشر ثقافة الحوار والفصاحة عالمياً.</p>
+                    </div>
+                    <div class="bg-slate-100 border border-slate-200 p-4 rounded-2xl">
+                        <div class="font-black text-slate-800 mb-1">🏆 جائزة كتارا للرواية العربية</div>
+                        <p class="text-xs text-slate-600">إحدى أبرز الجوائز الأدبية العربية التي تحتفي بالإبداع الروائي والنقدي العربي في الدوحة سنوياً.</p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl">
+                        <div class="font-black text-emerald-800 mb-1">✍️ مبادرات القراءة والتأليف</div>
+                        <p class="text-xs text-emerald-700">مسابقات وزارة التربية والتعليم والتعليم العالي في الخطابة والإلقاء والشعر الفصيح للطلاب.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FEEDBACK MODAL ==================== -->
+    <div id="feedbackModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden">
+            <div class="bg-qatar-maroon text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-black text-base">✉ ملاحظات واقتراحات المعلمين والطلاب</h3>
+                <button onclick="closeModal('feedbackModal')" class="text-white text-xl cursor-pointer">&times;</button>
+            </div>
+            <div class="p-6 space-y-3">
+                <p class="text-xs text-slate-500">رأيك يهمنا لتطوير منصة بيان قطر وإضافة دروس وتحديات لغوية جديدة.</p>
+                <select id="fbType" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm outline-none">
+                    <option>اقتراح لعبة لغوية جديدة</option>
+                    <option>إضافة درس من المنهج القطري</option>
+                    <option>ملاحظة عامة</option>
+                </select>
+                <textarea id="fbText" rows="3" placeholder="اكتب رسالتك هنا..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-qatar-maroon"></textarea>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button onclick="closeModal('feedbackModal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 cursor-pointer">إغلاق</button>
+                    <button onclick="submitFeedback()" class="px-5 py-2 rounded-xl text-xs font-bold bg-qatar-maroon text-white cursor-pointer">إرسال</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl text-sm font-bold hidden items-center gap-2 transition-all">
+        <i class="fa-solid fa-circle-check text-amber-400"></i>
+        <span id="toastMsg">تم بنجاح!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // ==================== 1. ARABIC LANGUAGE & QATAR HERITAGE QUESTION BANK ====================
+        let arabicQuestions = [
+            {
+                q: "في أي عام صدر قانون حماية اللغة العربية رقم (7) في دولة قطر؟",
+                options: ["2019", "2015", "2022"],
+                correct: 0,
+                fact: "صدر قانون حماية اللغة العربية رقم (7) لسنة 2019 لتعزيز استخدام العربية في كافة المؤسسات القطرية."
+            },
+            {
+                q: "ما هو المعجم التاريخي الضخم الذي أُطلق من الدوحة ويرصد تطور ألفاظ العربية عبر العصور؟",
+                options: ["معجم الدوحة التاريخي للغة العربية", "لسان العرب", "القاموس المحيط"],
+                correct: 0,
+                fact: "معجم الدوحة التاريخي للغة العربية مشروع علمي رائد يرصد تاريخ كل لفظ عربي منذ أقدم النصوص."
+            },
+            {
+                q: "ما إعراب كلمة «المجتهدُ» في جملة: (نجحَ الطالبُ المجتهدُ)؟",
+                options: ["نعت مرفوع وعلامة رفعه الضمة", "فاعل مرفوع", "مفعول به منصوب"],
+                correct: 0,
+                fact: "«المجتهدُ» صفة (نعت) تتبع المنعوت «الطالبُ» في الرفع والتعريف والإفراد."
+            },
+            {
+                q: "ماذا يُقصد بالمثل الشعبي القطري: «اللي ما يعرف الصقر يشويه»؟",
+                options: ["من يجهل قيمة الشيء الثمين يسيء تقديره", "الاهتمام بتربية الصقور", "الصبر مفتاح الفرج"],
+                correct: 0,
+                fact: "يُضرب هذا المثل القطري الأصيل لمن يفرّط في أمر عظيم القيمة لجهله بمكانته."
+            },
+            {
+                q: "أيُّ الكلمات الآتية كُتبت همزتها كتابة إملائية صحيحة؟",
+                options: ["مُكافأة", "مُكافئة", "مُكافؤة"],
+                correct: 0,
+                fact: "تُكتب الهمزة المتوسطة على ألف في «مكافأة» لأنها مفتوحة وما قبلها مفتوح (الفاء)."
+            },
+            {
+                q: "من هو الشاعر القطري المُلقّب بـ «شاعر قطر» وصاحب ديوان (قطريات)؟",
+                options: ["أحمد بن علي آل ثاني", "الشيخ جاسم بن محمد آل ثاني", "محمد الفيحاني"],
+                correct: 1,
+                fact: "المؤسس الشيخ جاسم بن محمد بن ثاني رحمه الله كان شاعراً فذاً وله ديوان مطبوع حافل بالحكمة."
+            },
+            {
+                q: "ما نوع الأسلوب البلاغي في قولنا: «الكتابُ خيرُ جليسٍ في الأنامِ»؟",
+                options: ["تشبيه بليغ", "أسلوب نهي", "استفهام مجازي"],
+                correct: 0,
+                fact: "شُبّه الكتاب بالجليس الصالح وحُذفت أداة التشبيه ووجه الشبه فهو تشبيه بليغ."
+            },
+            {
+                q: "ما مرادف كلمة «العَسْجَد» في اللغة العربية الفصحى؟",
+                options: ["الذهب", "اللؤلؤ", "المرجان"],
+                correct: 0,
+                fact: "العسجد من أسماء الذهب في معاجم اللغة العربية."
+            },
+            {
+                q: "ما هو المركز القطري العالمي الذي ينظم بطولات المناظرات باللغة العربية لطلاب المدارس والجامعات؟",
+                options: ["مركز مناظرات قطر", "مركز كتارا", "مكتبة قطر الوطنية"],
+                correct: 0,
+                fact: "مركز مناظرات قطر عضو مؤسسة قطر ويستضيف البطولة الدولية لمناظرات المدارس والجامعات بالعربية."
+            },
+            {
+                q: "في اللهجة القطرية الفصيحة الأصل، ما معنى كلمة «الدِّرْوازَة»؟",
+                options: ["البوابة الكبيرة", "النافذة الصغيرة", "السفينة الشراعية"],
+                correct: 0,
+                fact: "الدروازة تعني البوابة الكبيرة في البيوت والأسوار القطرية القديمة."
+            },
+            {
+                q: "ما جمع كلمة «لُؤْلُؤة» في اللغة العربية؟",
+                options: ["لَآلِئ", "لُؤْلُؤات فقط", "لَوَالِئ"],
+                correct: 0,
+                fact: "تُجمع لؤلؤة على «لآلئ» جمع تكسير، وتُكتب الهمزة على ياء غير منقوطة (نبرة)."
+            },
+            {
+                q: "أيُّ الأفعال الآتية من الأفعال الخمسة؟",
+                options: ["يكتبون", "كتبوا", "كاتبون"],
+                correct: 0,
+                fact: "الأفعال الخمسة هي كل فعل مضارع اتصلت به ألف الاثنين أو واو الجماعة أو ياء المخاطبة."
+            },
+            {
+                q: "ما الجائزة الأدبية الكبرى التي تُطلقها المؤسسة العامة للحي الثقافي «كتارا» سنوياً؟",
+                options: ["جائزة كتارا للرواية العربية", "جائزة البوكر", "جائزة عكاظ"],
+                correct: 0,
+                fact: "تُعد جائزة كتارا للرواية العربية من أرفع الجوائز الأدبية العربية في الدوحة."
+            },
+            {
+                q: "في جملة: (كان الجوُّ معتدلاً في الدوحة)، ما إعراب كلمة «معتدلاً»؟",
+                options: ["خبر كان منصوب", "اسم كان مرفوع", "حال منصوبة"],
+                correct: 0,
+                fact: "«كان» ترفع المبتدأ اسماً لها وتنصب الخبر خبراً لها."
+            }
+        ];
+
+        // ==================== 2. GAMES CATALOG (16 INTERACTIVE ARABIC GAMES) ====================
+        const categories = [
+            { id: 'all', name: 'الكل', icon: 'fa-border-all' },
+            { id: 'new', name: 'أُضيف حديثاً', icon: 'fa-sparkles' },
+            { id: 'grammar', name: 'النحو والإملاء', icon: 'fa-spell-check' },
+            { id: 'rhetoric', name: 'البلاغة والمفردات', icon: 'fa-feather-pointed' },
+            { id: 'qatar_lit', name: 'الأدب والتراث القطري', icon: 'fa-landmark' },
+            { id: 'competitions', name: 'المسابقات والتحدي', icon: 'fa-trophy' },
+            { id: 'luck', name: 'الحظ والتسلية الصفية', icon: 'fa-dice' }
+        ];
+
+        const gamesData = [
+            {
+                id: 'duel-two-players',
+                title: 'المبارزة اللغوية (فريقان)',
+                desc: 'منافسة صفية مباشرة بين فريقين: من يجيب أسرع في النحو والأدب ويحسم اللقب؟',
+                category: 'competitions',
+                isNew: true,
+                audience: ['kids', 'youth', 'adults'],
+                badge: 'للفصول الدراسية',
+                icon: '⚔️',
+                color: 'from-[#8A1538] to-[#5C0B23]',
+                engine: 'duel'
+            },
+            {
+                id: 'wheel-fortune',
+                title: 'عجلة الضاد الدوّارة',
+                desc: 'أدِر العجلة لاختيار فرع اللغة (نحو، بلاغة، أمثال قطرية، إملاء) وابدأ السؤال!',
+                category: 'luck',
+                isNew: true,
+                audience: ['kids', 'youth', 'adults'],
+                badge: 'للجميع',
+                icon: '🎡',
+                color: 'from-amber-600 to-[#8A1538]',
+                engine: 'wheel'
+            },
+            {
+                id: 'grammar-goal',
+                title: 'ركلات الفصاحة والإعراب',
+                desc: 'سدد هدفاً في شباك الأخطاء اللغوية مع كل إجابة نحوية وإملائية صحيحة!',
+                category: 'grammar',
+                isNew: true,
+                audience: ['kids', 'youth'],
+                badge: 'ابتدائي · إعدادي',
+                icon: '🥅',
+                color: 'from-emerald-600 to-teal-800',
+                engine: 'penalty'
+            },
+            {
+                id: 'doha-lexicon-safe',
+                title: 'خزنة معجم الدوحة',
+                desc: 'فك شفرة الأقفال الأربعة عبر الإجابة عن معاني المفردات الفصيحة والمصطلحات.',
+                category: 'rhetoric',
+                isNew: true,
+                audience: ['youth', 'adults'],
+                badge: 'ثانوي · مثقفون',
+                icon: '🔐',
+                color: 'from-slate-800 to-[#8A1538]',
+                engine: 'safe'
+            },
+            {
+                id: 'qatar-milestones-order',
+                title: 'رتّب محطات العربية في قطر',
+                desc: 'رتّب الإنجازات والمبادرات اللغوية والثقافية في دولة قطر بالترتيب الزمني.',
+                category: 'qatar_lit',
+                isNew: true,
+                audience: ['youth', 'adults'],
+                badge: 'ثقافة قطرية',
+                icon: '📜',
+                color: 'from-amber-700 to-yellow-600',
+                engine: 'order'
+            },
+            {
+                id: 'pearl-treasure',
+                title: 'صناديق اللؤلؤ والمعاني',
+                desc: 'افتح محارات وصناديق التراث القطري واكتشف السؤال اللغوي المخفي بداخلها.',
+                category: 'luck',
+                isNew: false,
+                audience: ['kids', 'youth'],
+                badge: 'ابتدائي · إعدادي',
+                icon: '🦪',
+                color: 'from-rose-600 to-[#8A1538]',
+                engine: 'treasure'
+            },
+            {
+                id: 'speed-spelling',
+                title: 'تحدي الإملاء السريع (10 ثوانٍ)',
+                desc: 'اختبر سرعة بديهتك في رسم الهمزات والقواعد الإملائية قبل نفاد الوقت!',
+                category: 'grammar',
+                isNew: true,
+                audience: ['kids', 'youth', 'adults'],
+                badge: 'للجميع',
+                icon: '⏱️',
+                color: 'from-red-700 to-rose-900',
+                engine: 'bomb'
+            },
+            {
+                id: 'camel-caravan-race',
+                title: 'سباق القوافل والبيان',
+                desc: 'سباق تراثي قطري تتقدم فيه قافلتك نحو الواحة بإجاباتك الأدبية الصحيحة.',
+                category: 'qatar_lit',
+                isNew: false,
+                audience: ['kids', 'youth', 'adults'],
+                badge: 'تراثي',
+                icon: '🐪',
+                color: 'from-amber-600 to-orange-700',
+                engine: 'race'
+            },
+            {
+                id: 'katara-quiz',
+                title: 'مسابقة كتارا للبيان والأدب',
+                desc: 'جولة شاملة في الشعر القطري، الأمثال الشعبية، وروائع البلاغة العربية.',
+                category: 'qatar_lit',
+                isNew: false,
+                audience: ['youth', 'adults'],
+                badge: 'إعدادي · ثانوي',
+                icon: '🏆',
+                color: 'from-[#8A1538] to-slate-900',
+                engine: 'quiz'
+            },
+            {
+                id: 'magic-inkwell',
+                title: 'محبرة الأسئلة السحرية',
+                desc: 'اختر إحدى المحابر الذهبية ليظهر لك سؤال مفاجئ في النحو أو المفردات.',
+                category: 'luck',
+                isNew: false,
+                audience: ['kids', 'youth'],
+                badge: 'للجميع',
+                icon: '🖋️',
+                color: 'from-purple-700 to-[#8A1538]',
+                engine: 'treasure'
+            },
+            {
+                id: 'syntax-ladder',
+                title: 'سُلّم الإعراب نحو القمة',
+                desc: 'اصعد درجات سلم الفصاحة درجة بعد درجة دون أن تخطئ في إعراب الجمل.',
+                category: 'grammar',
+                isNew: false,
+                audience: ['youth', 'adults'],
+                badge: 'إعدادي · ثانوي',
+                icon: '🪜',
+                color: 'from-rose-700 to-amber-600',
+                engine: 'quiz'
+            },
+            {
+                id: 'rhetoric-shield',
+                title: 'حصن البلاغة والبديع',
+                desc: 'افتح بوابات الحصن اللغوي بتمييز التشبيه والاستعارة والطباق والسجع.',
+                category: 'rhetoric',
+                isNew: false,
+                audience: ['youth', 'adults'],
+                badge: 'ثانوي · مثقفون',
+                icon: '🛡️',
+                color: 'from-slate-700 to-[#8A1538]',
+                engine: 'safe'
+            },
+            {
+                id: 'debate-arena',
+                title: 'حلبة مناظرات قطر',
+                desc: 'مواجهة فكرية ولغوية بين متسابقين لاختبار الحجة وسرعة البديهة اللغوية.',
+                category: 'competitions',
+                isNew: true,
+                audience: ['youth', 'adults'],
+                badge: 'إعدادي · ثانوي',
+                icon: '🎙️',
+                color: 'from-[#8A1538] to-rose-700',
+                engine: 'duel'
+            },
+            {
+                id: 'proverbs-cards',
+                title: 'بطاقات الأمثال القطرية',
+                desc: 'اكشف البطاقة وتعرف على المعنى البليغ خلف أشهر الأمثال الشعبية في قطر.',
+                category: 'qatar_lit',
+                isNew: false,
+                audience: ['kids', 'youth', 'adults'],
+                badge: 'للجميع',
+                icon: '🃏',
+                color: 'from-stone-700 to-[#8A1538]',
+                engine: 'treasure'
+            },
+            {
+                id: 'vocab-sprint',
+                title: 'سباق المرادفات والأضداد',
+                desc: 'أجب بأقصى سرعة عن مرادفات الكلمات الفصيحة قبل انتهاء عداد الثواني!',
+                category: 'rhetoric',
+                isNew: false,
+                audience: ['kids', 'youth'],
+                badge: 'ابتدائي · إعدادي',
+                icon: '⚡',
+                color: 'from-amber-500 to-red-700',
+                engine: 'bomb'
+            },
+            {
+                id: 'grammar-champions',
+                title: 'دوري أبطال النحو العربي',
+                desc: 'بطولة معرفية متكاملة تغطي المبتدأ والخبر، كان وأخواتها، والأفعال الخمسة.',
+                category: 'competitions',
+                isNew: false,
+                audience: ['kids', 'youth', 'adults'],
+                badge: 'للجميع',
+                icon: '🥇',
+                color: 'from-red-800 to-slate-900',
+                engine: 'quiz'
+            }
+        ];
+
+        // ==================== 3. STATE & RENDERING ====================
+        let currentCategory = 'all';
+        let currentAudience = 'all';
+        let playsCount = 2480;
+
+        function initApp() {
+            renderCategoryTabs();
+            renderGames();
+            updateStatsDisplay();
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('statPlaysCount').textContent = playsCount.toLocaleString('en-US');
+            document.getElementById('statQuestionsCount').textContent = arabicQuestions.length;
+        }
+
+        function renderCategoryTabs() {
+            const container = document.getElementById('categoryTabs');
+            container.innerHTML = categories.map(cat => {
+                const count = cat.id === 'all' 
+                    ? gamesData.length 
+                    : cat.id === 'new' 
+                        ? gamesData.filter(g => g.isNew).length 
+                        : gamesData.filter(g => g.category === cat.id).length;
+
+                const isActive = currentCategory === cat.id;
+                return `
+                    <button onclick="setCategoryFilter('${cat.id}')" 
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer border
+                        ${isActive 
+                            ? 'bg-qatar-maroon text-white border-qatar-maroon shadow-md' 
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-qatar-maroon/50 hover:text-qatar-maroon'}">
+                        <i class="fa-solid ${cat.icon}"></i>
+                        <span>${cat.name}</span>
+                        <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold ${isActive ? 'bg-white/25 text-white' : 'bg-slate-100 text-slate-600'}">
+                            ${count}
+                        </span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function setCategoryFilter(catId) {
+            currentCategory = catId;
+            renderCategoryTabs();
+            renderGames();
+        }
+
+        function setAudienceFilter(audId) {
+            currentAudience = audId;
+            document.querySelectorAll('.aud-btn').forEach(btn => {
+                btn.classList.remove('bg-qatar-maroon', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            const activeBtn = document.getElementById(`aud-${audId}`);
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            activeBtn.classList.add('bg-qatar-maroon', 'text-white', 'shadow-sm');
+            renderGames();
+        }
+
+        function renderGames() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const filtered = gamesData.filter(game => {
+                const matchCat = currentCategory === 'all' 
+                    || (currentCategory === 'new' && game.isNew)
+                    || game.category === currentCategory;
+                const matchAud = currentAudience === 'all' || game.audience.includes(currentAudience);
+                const matchSearch = game.title.toLowerCase().includes(query) || game.desc.toLowerCase().includes(query);
+                return matchCat && matchAud && matchSearch;
+            });
+
+            const catObj = categories.find(c => c.id === currentCategory);
+            document.getElementById('activeCategoryTitle').textContent = `${filtered.length} لعبة وتحدي في «${catObj.name}»`;
+
+            const grid = document.getElementById('gamesGrid');
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-16 bg-white rounded-3xl border border-slate-100">
+                        <div class="text-5xl mb-3">🔍</div>
+                        <h3 class="text-lg font-black text-slate-700">لا توجد ألعاب مطابقة لبحثك</h3>
+                        <p class="text-sm text-slate-500 mt-1">جرب اختيار تبويب آخر أو مسح نص البحث</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(game => `
+                <div class="game-card bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden flex flex-col justify-between group">
+                    <div>
+                        <!-- Card Top Banner -->
+                        <div class="h-36 bg-gradient-to-br ${game.color} relative p-5 flex flex-col justify-between text-white overflow-hidden">
+                            <div class="absolute -left-4 -bottom-4 text-7xl opacity-20 transform group-hover:scale-110 transition duration-300 select-none">
+                                ${game.icon}
+                            </div>
+                            <div class="flex items-center justify-between relative z-10">
+                                <span class="bg-black/25 backdrop-blur-sm text-[11px] font-bold px-3 py-1 rounded-full border border-white/15">
+                                    ${game.badge}
+                                </span>
+                                ${game.isNew ? '<span class="bg-amber-300 text-slate-900 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow">جديد ✨</span>' : ''}
+                            </div>
+                            <div class="relative z-10 flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner border border-white/25">
+                                    ${game.icon}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5">
+                            <h3 class="font-black text-base sm:text-lg text-slate-800 mb-1.5 group-hover:text-qatar-maroon transition">
+                                ${game.title}
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-2">
+                                ${game.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Action Footer -->
+                    <div class="px-5 pb-5 pt-1">
+                        <button onclick="launchGame('${game.id}')" class="w-full py-3 rounded-2xl bg-rose-50 hover:bg-qatar-maroon text-qatar-maroon hover:text-white font-extrabold text-sm flex items-center justify-center gap-2 transition cursor-pointer">
+                            <span>ابدأ التحدي</span>
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function surpriseMeGame() {
+            const randomGame = gamesData[Math.floor(Math.random() * gamesData.length)];
+            launchGame(randomGame.id);
+        }
+
+        // ==================== 4. INTERACTIVE PLAYABLE GAME ENGINES ====================
+        function launchGame(gameId) {
+            const game = gamesData.find(g => g.id === gameId);
+            if (!game) return;
+
+            playsCount++;
+            updateStatsDisplay();
+
+            document.getElementById('modalGameTitle').textContent = game.title;
+            document.getElementById('modalGameSubtitle').textContent = game.desc;
+            document.getElementById('modalGameIcon').textContent = game.icon;
+            document.getElementById('gameModal').classList.remove('hidden');
+
+            const stage = document.getElementById('gameStage');
+
+            switch (game.engine) {
+                case 'penalty':
+                    startPenaltyGame(stage);
+                    break;
+                case 'duel':
+                    startDuelGame(stage);
+                    break;
+                case 'wheel':
+                    startWheelGame(stage);
+                    break;
+                case 'safe':
+                    startSafeGame(stage);
+                    break;
+                case 'order':
+                    startOrderGame(stage);
+                    break;
+                case 'treasure':
+                    startTreasureGame(stage);
+                    break;
+                case 'bomb':
+                    startBombGame(stage);
+                    break;
+                case 'race':
+                    startRaceGame(stage);
+                    break;
+                default:
+                    startStandardQuizGame(stage);
+            }
+        }
+
+        function closeGameModal() {
+            document.getElementById('gameModal').classList.add('hidden');
+            if (window.bombInterval) clearInterval(window.bombInterval);
+        }
+
+        function toggleFullScreen() {
+            const modalBox = document.querySelector('#gameModal > div');
+            if (!document.fullscreenElement) {
+                modalBox.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
+        function getShuffledQuestions() {
+            return [...arabicQuestions].sort(() => Math.random() - 0.5);
+        }
+
+        // --- ENGINE A: STANDARD & LADDER QUIZ ---
+        function startStandardQuizGame(stage) {
+            const questions = getShuffledQuestions().slice(0, 6);
+            let idx = 0;
+            let score = 0;
+
+            function renderQ() {
+                if (idx >= questions.length) {
+                    triggerWinCelebration();
+                    stage.innerHTML = `
+                        <div class="text-center max-w-md space-y-4">
+                            <div class="text-6xl">🏆</div>
+                            <h3 class="text-2xl font-black text-slate-800">أحسنت يا فارس الضاد!</h3>
+                            <p class="text-slate-600">نتيجتك: <span class="text-qatar-maroon font-black text-xl">${score} من ${questions.length}</span></p>
+                            <div class="bg-rose-50 border border-rose-100 rounded-2xl p-4 text-sm text-qatar-dark font-bold">
+                                ${score >= 4 ? 'إتقان رائع للغة العربية وثقافة قطر الأدبية!' : 'محاولة موفقة! واصل التدريب لترتقي بفصاحتك.'}
+                            </div>
+                            <button onclick="startStandardQuizGame(document.getElementById('gameStage'))" class="bg-qatar-maroon text-white px-6 py-3 rounded-2xl font-bold cursor-pointer">العب مرة أخرى</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const item = questions[idx];
+                const mappedOpts = item.options.map((opt, i) => ({ text: opt, isCorrect: i === item.correct }))
+                                               .sort(() => Math.random() - 0.5);
+
+                stage.innerHTML = `
+                    <div class="w-full max-w-xl space-y-5">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+                            <span>السؤال ${idx + 1} من ${questions.length}</span>
+                            <span class="bg-rose-100 text-qatar-maroon px-3 py-1 rounded-full">النقاط: ${score}</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                            <div class="bg-qatar-maroon h-full transition-all duration-300" style="width: ${((idx) / questions.length) * 100}%"></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 text-center">
+                            <h4 class="text-lg sm:text-xl font-black text-slate-800 leading-snug">${item.q}</h4>
+                        </div>
+                        <div class="grid grid-cols-1 gap-3" id="optsBox">
+                            ${mappedOpts.map((o, k) => `
+                                <button onclick="handleQuizAns(${o.isCorrect}, this)" class="opt-btn w-full text-right bg-white hover:bg-rose-50 border-2 border-slate-200 hover:border-qatar-maroon p-4 rounded-2xl font-bold text-slate-700 transition flex items-center justify-between cursor-pointer">
+                                    <span>${o.text}</span>
+                                    <span class="w-7 h-7 rounded-full bg-slate-100 text-xs flex items-center justify-center font-black">${k + 1}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                        <div id="factBox" class="hidden bg-amber-50 border border-amber-200 p-3.5 rounded-2xl text-xs sm:text-sm text-amber-900 font-semibold"></div>
+                    </div>
+                `;
+
+                window.handleQuizAns = (isCorrect, btn) => {
+                    document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+                    if (isCorrect) {
+                        score++;
+                        btn.classList.remove('border-slate-200', 'bg-white');
+                        btn.classList.add('border-green-500', 'bg-green-50', 'text-green-800');
+                    } else {
+                        btn.classList.remove('border-slate-200', 'bg-white');
+                        btn.classList.add('border-red-500', 'bg-red-50', 'text-red-800');
+                    }
+                    const fb = document.getElementById('factBox');
+                    fb.innerHTML = `<i class="fa-solid fa-lightbulb text-amber-500 ml-1"></i> ${item.fact}`;
+                    fb.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        idx++;
+                        renderQ();
+                    }, 1700);
+                };
+            }
+            renderQ();
+        }
+
+        // --- ENGINE B: PENALTY SHOOTOUT (ركلات الفصاحة) ---
+        function startPenaltyGame(stage) {
+            const questions = getShuffledQuestions().slice(0, 5);
+            let round = 0;
+            let goals = 0;
+
+            function renderRound() {
+                if (round >= 5) {
+                    triggerWinCelebration();
+                    stage.innerHTML = `
+                        <div class="text-center space-y-4">
+                            <div class="text-6xl">⚽🥅</div>
+                            <h3 class="text-2xl font-black text-slate-800">نهاية جولة الفصاحة!</h3>
+                            <p class="text-lg font-bold text-qatar-maroon">سجلت ${goals} أهداف من 5 محاولات</p>
+                            <button onclick="startPenaltyGame(document.getElementById('gameStage'))" class="bg-qatar-maroon text-white px-6 py-3 rounded-2xl font-bold cursor-pointer">العب مجدداً</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const item = questions[round];
+                const mappedOpts = item.options.map((opt, i) => ({ text: opt, isCorrect: i === item.correct }))
+                                               .sort(() => Math.random() - 0.5);
+
+                stage.innerHTML = `
+                    <div class="w-full max-w-xl space-y-4">
+                        <div class="bg-gradient-to-b from-emerald-600 to-emerald-700 rounded-3xl p-5 text-white relative overflow-hidden border-4 border-white shadow-inner text-center">
+                            <div class="flex justify-between text-xs font-bold mb-2">
+                                <span>المحاولة ${round + 1} / 5</span>
+                                <span>الأهداف: ${goals} ⚽</span>
+                            </div>
+                            <div class="w-48 h-24 mx-auto border-t-4 border-x-4 border-white/90 rounded-t-lg bg-white/10 flex items-center justify-center relative">
+                                <span id="keeperIcon" class="text-3xl transition-all duration-500">🧤</span>
+                            </div>
+                            <div id="ballIcon" class="text-3xl mt-4 transition-all duration-500 inline-block">⚽</div>
+                            <p id="shotStatus" class="text-xs font-bold mt-2 text-emerald-100">اختر الإجابة اللغوية الصحيحة لتسدد الكرة!</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-black text-base text-slate-800">
+                            ${item.q}
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            ${mappedOpts.map(o => `
+                                <button onclick="shootPenalty(${o.isCorrect}, this)" class="pen-btn bg-white hover:bg-rose-50 border-2 border-slate-200 hover:border-qatar-maroon p-3 rounded-xl font-bold text-sm transition cursor-pointer">
+                                    ${o.text}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                window.shootPenalty = (isCorrect, btn) => {
+                    document.querySelectorAll('.pen-btn').forEach(b => b.disabled = true);
+                    const ball = document.getElementById('ballIcon');
+                    const keeper = document.getElementById('keeperIcon');
+                    const status = document.getElementById('shotStatus');
+
+                    if (isCorrect) {
+                        goals++;
+                        btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                        ball.style.transform = 'translate(-45px, -65px) scale(0.7)';
+                        keeper.style.transform = 'translateX(45px)';
+                        status.textContent = 'هدف رائع! إجابة فصيحة في المقص! 🔥';
+                        status.classList.add('text-amber-300', 'text-sm');
+                    } else {
+                        btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                        ball.style.transform = 'translate(0px, -55px) scale(0.75)';
+                        status.textContent = 'تصدى لها الحارس! ركّز في القاعدة القادمة.';
+                    }
+
+                    setTimeout(() => {
+                        round++;
+                        renderRound();
+                    }, 1500);
+                };
+            }
+            renderRound();
+        }
+
+        // --- ENGINE C: TWO-PLAYER DUEL (المبارزة اللغوية) ---
+        function startDuelGame(stage) {
+            const questions = getShuffledQuestions().slice(0, 7);
+            let qIdx = 0;
+            let p1Score = 0;
+            let p2Score = 0;
+
+            function renderDuel() {
+                if (qIdx >= questions.length) {
+                    triggerWinCelebration();
+                    const winner = p1Score > p2Score ? 'فريق العنابي (1)' : p2Score > p1Score ? 'فريق الذهبي (2)' : 'تعادل مثير بين الفريقين!';
+                    stage.innerHTML = `
+                        <div class="text-center space-y-4">
+                            <div class="text-6xl">⚔️🏆</div>
+                            <h3 class="text-2xl font-black text-slate-800">انتهت المناظرة والمبارزة!</h3>
+                            <p class="text-lg font-black text-qatar-maroon">${winner}</p>
+                            <div class="flex justify-center gap-6 text-sm font-bold">
+                                <span class="bg-rose-100 text-qatar-maroon px-4 py-2 rounded-xl">العنابي: ${p1Score}</span>
+                                <span class="bg-amber-100 text-amber-900 px-4 py-2 rounded-xl">الذهبي: ${p2Score}</span>
+                            </div>
+                            <button onclick="startDuelGame(document.getElementById('gameStage'))" class="bg-qatar-maroon text-white px-6 py-3 rounded-2xl font-bold cursor-pointer">مبارزة جديدة</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const item = questions[qIdx];
+                const mappedOpts = item.options.map((opt, i) => ({ text: opt, isCorrect: i === item.correct }))
+                                               .sort(() => Math.random() - 0.5);
+
+                stage.innerHTML = `
+                    <div class="w-full max-w-2xl space-y-4">
+                        <div class="flex items-center justify-between bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="w-4 h-4 rounded-full bg-qatar-maroon"></span>
+                                <span class="font-black text-sm">فريق العنابي: ${p1Score}</span>
+                            </div>
+                            <span class="text-xs font-bold bg-slate-100 px-3 py-1 rounded-full">جولة ${qIdx + 1}/${questions.length}</span>
+                            <div class="flex items-center gap-2">
+                                <span class="font-black text-sm">فريق الذهبي: ${p2Score}</span>
+                                <span class="w-4 h-4 rounded-full bg-amber-500"></span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 text-white p-5 rounded-2xl text-center font-black text-lg">
+                            ${item.q}
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-rose-50 border-2 border-qatar-maroon/30 rounded-2xl p-4 space-y-2">
+                                <div class="text-xs font-black text-qatar-maroon text-center mb-2">إجابة فريق العنابي</div>
+                                ${mappedOpts.map(o => `
+                                    <button onclick="duelAnswer(1, ${o.isCorrect})" class="duel-btn w-full bg-white hover:bg-qatar-maroon hover:text-white border border-rose-200 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer">
+                                        ${o.text}
+                                    </button>
+                                `).join('')}
+                            </div>
+
+                            <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 space-y-2">
+                                <div class="text-xs font-black text-amber-800 text-center mb-2">إجابة فريق الذهبي</div>
+                                ${mappedOpts.map(o => `
+                                    <button onclick="duelAnswer(2, ${o.isCorrect})" class="duel-btn w-full bg-white hover:bg-amber-600 hover:text-white border border-amber-300 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer">
+                                        ${o.text}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                window.duelAnswer = (player, isCorrect) => {
+                    document.querySelectorAll('.duel-btn').forEach(b => b.disabled = true);
+                    if (isCorrect) {
+                        if (player === 1) p1Score++; else p2Score++;
+                        showToast(`نقطة لصالح ${player === 1 ? 'فريق العنابي' : 'فريق الذهبي'}!`);
+                    } else {
+                        if (player === 1) p2Score++; else p1Score++;
+                        showToast(`إجابة خاطئة! النقطة تذهب للفريق المنافس.`);
+                    }
+                    setTimeout(() => {
+                        qIdx++;
+                        renderDuel();
+                    }, 1000);
+                };
+            }
+            renderDuel();
+        }
+
+        // --- ENGINE D: WHEEL OF FORTUNE (عجلة الضاد الدوّارة) ---
+        function startWheelGame(stage) {
+            const segments = [
+                "ركن النحو والإعراب",
+                "الأمثال القطرية",
+                "البلاغة والبيان",
+                "الإملاء الصحيح",
+                "مبادرات قطر اللغوية",
+                "معاني المفردات"
+            ];
+            let currentDeg = 0;
+
+            stage.innerHTML = `
+                <div class="flex flex-col items-center space-y-5 w-full max-w-lg">
+                    <div class="relative w-64 h-64 sm:w-72 sm:h-72">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 text-3xl text-slate-900 drop-shadow">▼</div>
+                        <div id="wheelSpinner" class="w-full h-full rounded-full border-8 border-qatar-gold shadow-xl overflow-hidden wheel-transition relative bg-qatar-maroon flex items-center justify-center">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <path d="M50,50 L50,0 A50,50 0 0,1 93.3,25 Z" fill="#8A1538"/>
+                                <path d="M50,50 L93.3,25 A50,50 0 0,1 93.3,75 Z" fill="#1E293B"/>
+                                <path d="M50,50 L93.3,75 A50,50 0 0,1 50,100 Z" fill="#D4AF37"/>
+                                <path d="M50,50 L50,100 A50,50 0 0,1 6.7,75 Z" fill="#5C0B23"/>
+                                <path d="M50,50 L6.7,75 A50,50 0 0,1 6.7,25 Z" fill="#334155"/>
+                                <path d="M50,50 L6.7,25 A50,50 0 0,1 50,0 Z" fill="#B91C4A"/>
+                                <circle cx="50" cy="50" r="14" fill="#FFFFFF" stroke="#D4AF37" stroke-width="3"/>
+                            </svg>
+                            <span class="absolute font-amiri font-black text-qatar-maroon text-xl">ض</span>
+                        </div>
+                    </div>
+
+                    <button id="spinBtn" onclick="spinArabiWheel()" class="bg-qatar-maroon hover:bg-qatar-dark text-white font-black px-8 py-3.5 rounded-2xl shadow-lg text-base transition transform active:scale-95 cursor-pointer">
+                        🎡 أدِر عجلة الضاد الآن!
+                    </button>
+
+                    <div id="wheelResultBox" class="hidden w-full bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center space-y-3"></div>
+                </div>
+            `;
+
+            window.spinArabiWheel = () => {
+                const btn = document.getElementById('spinBtn');
+                btn.disabled = true;
+                const extraDeg = Math.floor(1440 + Math.random() * 1440);
+                currentDeg += extraDeg;
+                document.getElementById('wheelSpinner').style.transform = `rotate(${currentDeg}deg)`;
+
+                setTimeout(() => {
+                    btn.disabled = false;
+                    const randomTopic = segments[Math.floor(Math.random() * segments.length)];
+                    const qItem = arabicQuestions[Math.floor(Math.random() * arabicQuestions.length)];
+                    const resBox = document.getElementById('wheelResultBox');
+                    resBox.classList.remove('hidden');
+                    resBox.innerHTML = `
+                        <span class="inline-block bg-amber-100 text-amber-800 text-xs font-black px-3 py-1 rounded-full">${randomTopic}</span>
+                        <h4 class="font-black text-base text-slate-800">${qItem.q}</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                            ${qItem.options.map((opt, idx) => `
+                                <button onclick="checkWheelAns(this, ${idx === qItem.correct})" class="bg-slate-50 hover:bg-rose-50 border border-slate-200 py-2 px-3 rounded-xl text-xs font-bold cursor-pointer">
+                                    ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    `;
+                }, 4000);
+            };
+
+            window.checkWheelAns = (btn, isCorrect) => {
+                if (isCorrect) {
+                    btn.classList.add('bg-green-500', 'text-white', 'border-green-500');
+                    triggerWinCelebration();
+                    showToast('إجابة صحيحة! أحسنت يا فارس العربية 🎉');
+                } else {
+                    btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                    showToast('حاول مرة أخرى!');
+                }
+            };
+        }
+
+        // --- ENGINE E: SMART SAFE (خزنة معجم الدوحة) ---
+        function startSafeGame(stage) {
+            const questions = getShuffledQuestions().slice(0, 4);
+            let unlocked = 0;
+
+            function renderSafe() {
+                if (unlocked >= 4) {
+                    triggerWinCelebration();
+                    stage.innerHTML = `
+                        <div class="text-center space-y-4">
+                            <div class="text-6xl">🔓📚</div>
+                            <h3 class="text-2xl font-black text-slate-800">فُتحت خزنة البيان والمعرفة!</h3>
+                            <p class="text-slate-600 text-sm">نجحت في فك جميع الأقفال الأربعة وإثبات تمكّنك اللغوي.</p>
+                            <button onclick="startSafeGame(document.getElementById('gameStage'))" class="bg-qatar-maroon text-white px-6 py-3 rounded-2xl font-bold cursor-pointer">إعادة التحدي</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const item = questions[unlocked];
+                stage.innerHTML = `
+                    <div class="w-full max-w-lg space-y-5 text-center">
+                        <div class="flex justify-center gap-3">
+                            ${[0,1,2,3].map(i => `
+                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-2 ${i < unlocked ? 'bg-green-100 border-green-500' : i === unlocked ? 'bg-rose-50 border-qatar-maroon animate-bounce' : 'bg-slate-100 border-slate-300'}">
+                                    ${i < unlocked ? '🔓' : '🔒'}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 font-black text-base text-slate-800">
+                            القفل رقم (${unlocked + 1}): ${item.q}
+                        </div>
+                        <div class="grid grid-cols-1 gap-2.5">
+                            ${item.options.map((opt, idx) => `
+                                <button onclick="tryUnlock(${idx === item.correct})" class="bg-white hover:bg-slate-900 hover:text-white border border-slate-200 py-3 px-4 rounded-xl font-bold text-sm transition cursor-pointer">
+                                    ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                window.tryUnlock = (ok) => {
+                    if (ok) {
+                        unlocked++;
+                        showToast('تم فتح القفل اللغوي بنجاح! 🔓');
+                        renderSafe();
+                    } else {
+                        showToast('الرمز خاطئ! جرب خياراً آخر 🔒');
+                    }
+                };
+            }
+            renderSafe();
+        }
+
+        // --- ENGINE F: ORDER HISTORICAL EVENTS ---
+        function startOrderGame(stage) {
+            const events = [
+                { year: 2007, text: "تأسيس مركز مناظرات قطر لنشر ثقافة الحوار بالعربية" },
+                { year: 2015, text: "إطلاق جائزة كتارا للرواية العربية في الدوحة" },
+                { year: 2018, text: "إطلاق البوابة الإلكترونية لمعجم الدوحة التاريخي للغة العربية" },
+                { year: 2019, text: "صدور قانون حماية اللغة العربية رقم (7) في دولة قطر" }
+            ];
+            let shuffled = [...events].sort(() => Math.random() - 0.5);
+            let selectedOrder = [];
+
+            function renderOrder() {
+                stage.innerHTML = `
+                    <div class="w-full max-w-lg space-y-4">
+                        <p class="text-center text-sm font-bold text-slate-600">اضغط على المبادرات القطرية بالترتيب الزمني من الأقدم إلى الأحدث:</p>
+                        
+                        <div class="space-y-2">
+                            ${shuffled.map((ev, i) => {
+                                const chosenIdx = selectedOrder.indexOf(ev);
+                                return `
+                                    <button onclick="pickOrderItem(${i})" ${chosenIdx !== -1 ? 'disabled' : ''} class="w-full p-3.5 rounded-2xl border-2 text-right font-bold text-sm flex items-center justify-between transition cursor-pointer
+                                        ${chosenIdx !== -1 ? 'bg-rose-50 border-qatar-maroon text-qatar-maroon opacity-80' : 'bg-white border-slate-200 hover:border-qatar-maroon'}">
+                                        <span>${ev.text}</span>
+                                        <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs font-black">
+                                            ${chosenIdx !== -1 ? chosenIdx + 1 : '?'}
+                                        </span>
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+
+                        <div class="flex justify-center gap-3 pt-2">
+                            <button onclick="startOrderGame(document.getElementById('gameStage'))" class="px-4 py-2 rounded-xl bg-slate-200 text-xs font-bold cursor-pointer">إعادة الترتيب</button>
+                        </div>
+                    </div>
+                `;
+
+                window.pickOrderItem = (idx) => {
+                    selectedOrder.push(shuffled[idx]);
+                    if (selectedOrder.length === events.length) {
+                        const isRight = selectedOrder.every((item, index) => item.year === events[index].year);
+                        if (isRight) {
+                            triggerWinCelebration();
+                            stage.innerHTML = `
+                                <div class="text-center space-y-4">
+                                    <div class="text-6xl">📜✨</div>
+                                    <h3 class="text-2xl font-black text-green-700">ترتيب تاريخي صحيح 100%!</h3>
+                                    <p class="text-sm text-slate-600">أنت مطّلع على أبرز معالم دعم اللغة العربية في دولة قطر.</p>
+                                    <button onclick="startOrderGame(document.getElementById('gameStage'))" class="bg-qatar-maroon text-white px-6 py-3 rounded-2xl font-bold cursor-pointer">العب مرة أخرى</button>
+                                </div>
+                            `;
+                            return;
+                        } else {
+                            showToast('الترتيب غير صحيح! حاول مرة أخرى');
+                            selectedOrder = [];
+                        }
+                    }
+                    renderOrder();
+                };
+            }
+            renderOrder();
+        }
+
+        // --- ENGINE G: TREASURE BOXES (صناديق اللؤلؤ) ---
+        function startTreasureGame(stage) {
+            const boxes = [1, 2, 3, 4, 5, 6];
+            let opened = [];
+
+            function renderBoxes() {
+                stage.innerHTML = `
+                    <div class="w-full max-w-xl text-center space-y-5">
+                        <p class="font-bold text-sm text-slate-600">اختر أحد صناديق اللؤلؤ لتكتشف السؤال اللغوي بداخله!</p>
+                        <div class="grid grid-cols-3 gap-4">
+                            ${boxes.map(num => {
+                                const isOpened = opened.includes(num);
+                                return `
+                                    <button onclick="openTreasureBox(${num})" ${isOpened ? 'disabled' : ''} class="h-28 rounded-3xl flex flex-col items-center justify-center gap-1 font-black text-lg transition transform hover:scale-105 cursor-pointer shadow-md
+                                        ${isOpened ? 'bg-slate-200 text-slate-400' : 'bg-gradient-to-br from-qatar-maroon to-qatar-dark text-white border-2 border-qatar-gold'}">
+                                        <span class="text-3xl">${isOpened ? '📭' : '🦪'}</span>
+                                        <span class="text-xs">صندوق ${num}</span>
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                        <div id="boxQuestionArea" class="hidden bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3"></div>
+                    </div>
+                `;
+
+                window.openTreasureBox = (num) => {
+                    opened.push(num);
+                    renderBoxes();
+                    const qItem = arabicQuestions[Math.floor(Math.random() * arabicQuestions.length)];
+                    const area = document.getElementById('boxQuestionArea');
+                    area.classList.remove('hidden');
+                    area.innerHTML = `
+                        <div class="text-xs font-black text-qatar-maroon">درّة الصندوق رقم (${num}):</div>
+                        <h4 class="font-black text-base text-slate-800">${qItem.q}</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            ${qItem.options.map((opt, i) => `
+                                <button onclick="checkBoxAns(this, ${i === qItem.correct})" class="bg-slate-50 hover:bg-rose-50 border border-slate-200 py-2 px-3 rounded-xl text-xs font-bold cursor-pointer">
+                                    ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    `;
+                };
+
+                window.checkBoxAns = (btn, ok) => {
+                    if (ok) {
+                        btn.classList.add('bg-green-500', 'text-white');
+                        triggerWinCelebration();
+                        showToast('ربحت لؤلؤة المعرفة! 🦪');
+                    } else {
+                        btn.classList.add('bg-red-500', 'text-white');
+                        showToast('إجابة خاطئة، افتح صندوقاً آخر!');
+                    }
+                };
+            }
+            renderBoxes();
+        }
+
+        // --- ENGINE H: SPEED TIMER CHALLENGE ---
+        function startBombGame(stage) {
+            const questions = getShuffledQuestions().slice(0, 5);
+            let qIdx = 0;
+            let timeLeft = 10;
+            let score = 0;
+
+            function nextBombQ() {
+                if (window.bombInterval) clearInterval(window.bombInterval);
+                if (qIdx >= questions.length) {
+                    triggerWinCelebration();
+                    stage.innerHTML = `
+                        <div class="text-center space-y-4">
+                            <div class="text-6xl">⏱️✨</div>
+                            <h3 class="text-2xl font-black">نجحت في تحدي السرعة اللغوية!</h3>
+                            <p class="font-bold text-qatar-maroon text-lg">النقاط: ${score} / ${questions.length}</p>
+                            <button onclick="startBombGame(document.getElementById('gameStage'))" class="bg-qatar-maroon text-white px-6 py-3 rounded-2xl font-bold cursor-pointer">العب مجدداً</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                timeLeft = 10;
+                const item = questions[qIdx];
+                stage.innerHTML = `
+                    <div class="w-full max-w-lg space-y-4 text-center">
+                        <div class="inline-flex items-center gap-2 bg-rose-100 text-qatar-maroon px-4 py-2 rounded-full font-black text-lg">
+                            <span>⏱️</span>
+                            <span id="bombTimerDisplay">${timeLeft}</span>
+                            <span>ثواني</span>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 font-black text-base">
+                            ${item.q}
+                        </div>
+                        <div class="grid grid-cols-1 gap-2.5">
+                            ${item.options.map((opt, i) => `
+                                <button onclick="ansBomb(${i === item.correct})" class="bg-white hover:bg-qatar-maroon hover:text-white border border-slate-200 py-3 px-4 rounded-xl font-bold text-sm transition cursor-pointer">
+                                    ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                window.bombInterval = setInterval(() => {
+                    timeLeft--;
+                    const el = document.getElementById('bombTimerDisplay');
+                    if (el) el.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(window.bombInterval);
+                        showToast('انتهى الوقت! ⏰');
+                        qIdx++;
+                        nextBombQ();
+                    }
+                }, 1000);
+
+                window.ansBomb = (ok) => {
+                    clearInterval(window.bombInterval);
+                    if (ok) {
+                        score++;
+                        showToast('سريع وفصيح! ⚡');
+                    } else {
+                        showToast('إجابة خاطئة!');
+                    }
+                    qIdx++;
+                    nextBombQ();
+                };
+            }
+            nextBombQ();
+        }
+
+        // --- ENGINE I: CAMEL CARAVAN RACE ---
+        function startRaceGame(stage) {
+            const questions = getShuffledQuestions().slice(0, 5);
+            let step = 0;
+
+            function renderRace() {
+                if (step >= 5) {
+                    triggerWinCelebration();
+                    stage.innerHTML = `
+                        <div class="text-center space-y-4">
+                            <div class="text-6xl">🏁🏆</div>
+                            <h3 class="text-2xl font-black text-slate-800">وصلت قافلتك إلى واحة البيان أولاً!</h3>
+                            <p class="text-sm text-slate-600">فوز مستحق بفضل إتقانك للغة الضاد.</p>
+                            <button onclick="startRaceGame(document.getElementById('gameStage'))" class="bg-qatar-maroon text-white px-6 py-3 rounded-2xl font-bold cursor-pointer">سباق جديد</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const item = questions[step];
+                const progress = (step / 5) * 85;
+
+                stage.innerHTML = `
+                    <div class="w-full max-w-xl space-y-5">
+                        <div class="bg-amber-100/70 border-2 border-amber-300 rounded-3xl p-4 relative overflow-hidden">
+                            <div class="flex justify-between text-xs font-bold text-amber-900 mb-3">
+                                <span>البداية</span>
+                                <span>واحة البيان 🏁</span>
+                            </div>
+                            <div class="h-12 bg-amber-200/60 rounded-2xl relative flex items-center px-3">
+                                <div class="text-3xl transition-all duration-500 absolute" style="right: ${progress}%">
+                                    🐪📜
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center font-black text-base">
+                            ${item.q}
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            ${item.options.map((opt, i) => `
+                                <button onclick="advanceRace(${i === item.correct})" class="bg-white hover:bg-qatar-maroon hover:text-white border border-slate-200 py-3 px-3 rounded-xl font-bold text-xs sm:text-sm transition cursor-pointer">
+                                    ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                window.advanceRace = (ok) => {
+                    if (ok) {
+                        step++;
+                        showToast('تقدمت قافلتك نحو الصدارة! 🚀');
+                        renderRace();
+                    } else {
+                        showToast('إجابة خاطئة! حاول مجدداً للتقدم');
+                    }
+                };
+            }
+            renderRace();
+        }
+
+        // ==================== 5. QUESTION EDITOR & OTHER MODALS ====================
+        function openQuestionEditor() {
+            document.getElementById('editorModal').classList.remove('hidden');
+            renderQuestionsList();
+        }
+
+        function renderQuestionsList() {
+            document.getElementById('editorQCount').textContent = arabicQuestions.length;
+            const list = document.getElementById('questionsList');
+            list.innerHTML = arabicQuestions.map((item, idx) => `
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-2 text-xs">
+                    <div>
+                        <div class="font-bold text-slate-800">${idx + 1}. ${item.q}</div>
+                        <div class="text-green-700 font-semibold mt-0.5">الإجابة الصحيحة: ${item.options[item.correct]}</div>
+                    </div>
+                    ${idx >= 14 ? `<button onclick="deleteQuestion(${idx})" class="text-red-500 hover:text-red-700 p-1 cursor-pointer"><i class="fa-solid fa-trash"></i></button>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function addCustomQuestion() {
+            const q = document.getElementById('newQText').value.trim();
+            const o1 = document.getElementById('newQOpt1').value.trim();
+            const o2 = document.getElementById('newQOpt2').value.trim();
+            const o3 = document.getElementById('newQOpt3').value.trim();
+
+            if (!q || !o1 || !o2 || !o3) {
+                showToast('يرجى تعبئة السؤال وجميع الخيارات الثلاثة');
+                return;
+            }
+
+            arabicQuestions.unshift({
+                q: q,
+                options: [o1, o2, o3],
+                correct: 0,
+                fact: "سؤال مضاف من المعلمين والطلاب في منصة بيان قطر."
+            });
+
+            document.getElementById('newQText').value = '';
+            document.getElementById('newQOpt1').value = '';
+            document.getElementById('newQOpt2').value = '';
+            document.getElementById('newQOpt3').value = '';
+
+            renderQuestionsList();
+            updateStatsDisplay();
+            showToast('تمت إضافة السؤال بنجاح إلى جميع الألعاب!');
+        }
+
+        function deleteQuestion(idx) {
+            arabicQuestions.splice(idx, 1);
+            renderQuestionsList();
+            updateStatsDisplay();
+        }
+
+        function openClubHistoryModal() {
+            document.getElementById('historyModal').classList.remove('hidden');
+        }
+
+        function openIntroVideoModal() {
+            openClubHistoryModal();
+        }
+
+        function openFeedbackModal() {
+            document.getElementById('feedbackModal').classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function submitFeedback() {
+            const txt = document.getElementById('fbText').value.trim();
+            if (!txt) {
+                showToast('يرجى كتابة رسالتك أولاً');
+                return;
+            }
+            document.getElementById('fbText').value = '';
+            closeModal('feedbackModal');
+            showToast('شكراً لمشاركتك! وصلت رسالتك لإدارة منصة بيان قطر ❤️');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 2800);
+        }
+
+        function triggerWinCelebration() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 70,
+                    spread: 60,
+                    origin: { y: 0.6 },
+                    colors: ['#8A1538', '#FFFFFF', '#D4AF37']
+                });
+            }
+        }
+
+        // Start App
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
